@@ -3,4 +3,4 @@
 const Webbrowser = require('./webbrowser.js');
 
 const browser = new Webbrowser();
-browser.linuxOpen('https://xkcd.com');
+browser.open('https://xkcd.com/353/');
