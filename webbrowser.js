@@ -9,23 +9,23 @@ class Webbrowser {
 	open(url) {
 		const opening_methods = {
 			win32: [
-				{ command: 'start', args: url},
-				{ command: 'explorer', args: url}
+				{ command: 'start', args: [url]},
+				{ command: 'explorer', args: [url]}
 			],
 			linux: [
-				{ command: 'xdg-open', args: url},
-				{ command: 'elinks', args: url},
-				{ command: 'lynx', args: url},
-				{ command: 'w3m', args: url}
+				{ command: 'xdg-open', args: [url]},
+				{ command: 'elinks', args: [url]},
+				{ command: 'lynx', args: [url]},
+				{ command: 'w3m', args: [url]}
 			],
 			darwin: [
-				{ command: 'open', args: url}
+				{ command: 'open', args: [url]}
 			],
 			sunos: [
-				{ command: 'sdtwebclient', args: url},
-				{ command: 'elinks', args: url},
-				{ command: 'lynx', args: url},
-				{ command: 'w3m', args: url}
+				{ command: 'sdtwebclient', args: [url]},
+				{ command: 'elinks', args: [url]},
+				{ command: 'lynx', args: [url]},
+				{ command: 'w3m', args: [url]}
 			]
 		};
 
@@ -54,7 +54,7 @@ class Webbrowser {
 	tryMethods(methods) {
 		for (let i = 0; i < methods.length; ++i) {
 			try {
-				const spawned_process = spawnSync(methods[i].command, ['https://xkcd.com'], {shell: true, stdio: [process.stdin, process.stdout]});
+				const spawned_process = spawnSync(methods[i].command, methods[i].args, {shell: true, stdio: [process.stdin, process.stdout]});
 				if (spawned_process.status === 0) {
 					return;
 				}
